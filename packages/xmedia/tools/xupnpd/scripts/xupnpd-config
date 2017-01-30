@@ -1,0 +1,24 @@
+#!/bin/sh
+################################################################################
+#      This file is part of Alex@ELEC - http://www.alexelec.in.ua
+#      Copyright (C) 2011-2017 Alexandr Zuyev (alex@alexelec.in.ua)
+################################################################################
+
+SERVICE_DIR="/storage/.cache/services"
+XUPNP_CONFIG="/storage/.config/xupnpd/xupnpd.lua"
+
+[ -f $SERVICE_DIR/xupnpd.conf ] && . $SERVICE_DIR/xupnpd.conf
+
+[ -z $XUPNP_PORT ] && XUPNP_PORT="8687"
+[ -z $XUPNP_DEBUG ] && XUPNP_DEBUG="0"
+
+# port
+sed -i -e "s/cfg\.http_port=.*/cfg\.http_port=$XUPNP_PORT/" $XUPNP_CONFIG
+
+# debug
+if [ "$XUPNP_DEBUG" == "0" ]; then
+  sed -i -e "s/cfg\.embedded=.*/cfg\.embedded=true/" $XUPNP_CONFIG
+else
+  sed -i -e "s/cfg\.debug=.*/cfg\.debug=1/" $XUPNP_CONFIG
+  sed -i -e "s/cfg\.embedded=.*/cfg\.embedded=false/" $XUPNP_CONFIG
+fi

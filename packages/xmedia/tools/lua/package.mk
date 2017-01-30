@@ -19,19 +19,39 @@ PKG_AUTORECONF="no"
 
 _MAJORVER=${PKG_VERSION%.*}
 
+pre_build_target() {
+  mkdir -p $PKG_BUILD/.$TARGET_NAME
+  cp -RP $PKG_BUILD/* $PKG_BUILD/.$TARGET_NAME
+}
+
+pre_build_host() {
+  mkdir -p $PKG_BUILD/.$HOST_NAME
+  cp -RP $PKG_BUILD/* $PKG_BUILD/.$HOST_NAME
+}
+
+pre_make_target() {
+  cd .$TARGET_NAME
+}
+
+pre_make_host() {
+  cd .$HOST_NAME
+}
+
 make_host() {
-  : none
+  make CC="$CC" CFLAGS="$CFLAGS -fPIC -DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1" linux all
 }
 
 makeinstall_host() {
-  mkdir -p $ROOT/$TOOLCHAIN/bin
-   cp -P $PKG_DIR/src/* $ROOT/$TOOLCHAIN/bin
+  make \
+  INSTALL_TOP=$ROOT/$TOOLCHAIN \
+  install
 }
 
 make_target() {
   CFLAGS=`echo $CFLAGS | sed -e "s|-mcpu=cortex-a53||"`
-  make CC="$CC" CFLAGS="$CFLAGS -fPIC -DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1" linux
+  make CC="$CC" CFLAGS="$CFLAGS -fPIC -DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1" linux all
 }
+
 
 makeinstall_target() {
   make \

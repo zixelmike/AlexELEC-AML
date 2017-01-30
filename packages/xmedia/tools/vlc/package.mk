@@ -5,12 +5,12 @@
 
 PKG_NAME="vlc"
 PKG_VERSION="3.0.0"
-PKG_REV="20161211-0236-git"
+PKG_REV="20170129-0236-git"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.videolan.org"
 PKG_URL="https://nightlies.videolan.org/build/source/$PKG_NAME-$PKG_VERSION-$PKG_REV.tar.xz"
-PKG_DEPENDS_TARGET="toolchain dbus libdvbpsi gnutls ffmpeg libmpeg2 zlib lua"
+PKG_DEPENDS_TARGET="toolchain dbus libdvbpsi gnutls ffmpeg libmpeg2 zlib lua:host lua"
 PKG_SECTION="xmedia/tools"
 PKG_SHORTDESC="VideoLAN multimedia player and streamer"
 PKG_LONGDESC="VLC is the VideoLAN project's media player. It plays MPEG, MPEG2, MPEG4, DivX, MOV, WMV, QuickTime, mp3, Ogg/Vorbis files, DVDs, VCDs, and multimedia streams from various network sources."
@@ -32,7 +32,6 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-silent-rules \
             --enable-lua \
             --enable-httpd \
             --enable-vlm \
-            --disable-growl \
             --disable-notify \
             --disable-taglib \
             --disable-live555 \
@@ -43,16 +42,12 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-silent-rules \
             --disable-decklink \
             --disable-sftp \
             --enable-v4l2 \
-            --disable-gnomevfs \
-            --disable-vcdx \
             --disable-vcd \
             --disable-libcddb \
             --enable-dvbpsi \
             --disable-screen \
             --enable-ogg \
-            --enable-mux_ogg \
             --disable-shout\
-            --disable-mkv \
             --disable-mod \
             --enable-mpc \
             --disable-gme \
@@ -69,7 +64,6 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-silent-rules \
             --enable-flac \
             --enable-aa \
             --disable-twolame \
-            --disable-quicktime \
             --disable-realrtsp \
             --disable-libtar \
             --disable-a52 \
@@ -111,16 +105,11 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-silent-rules \
             --disable-skins2 \
             --disable-kai \
             --disable-macosx \
-            --disable-macosx-dialog-provider \
-            --disable-macosx-eyetv \
             --disable-macosx-vlc-app \
             --disable-macosx-qtkit \
-            --disable-macosx-quartztext \
             --disable-ncurses \
             --disable-goom \
             --disable-projectm \
-            --disable-atmo \
-            --disable-bonjour \
             --enable-udev \
             --disable-mtp \
             --disable-lirc \
@@ -133,12 +122,10 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-silent-rules \
             --disable-sid \
             --disable-crystalhd \
             --disable-dxva2 \
-            --enable-vlc \
-            LUAC=$ROOT/$TOOLCHAIN/bin/luac"
+            --enable-vlc"
 
 pre_configure_target() {
   export LDFLAGS="$LDFLAGS -lresolv"
-  export LUA_LIBS="-L$SYSROOT_PREFIX/usr/lib -llua -lm"
 }
 
 post_makeinstall_target() {
