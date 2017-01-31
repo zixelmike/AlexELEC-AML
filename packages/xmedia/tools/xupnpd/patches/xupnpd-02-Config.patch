@@ -1,6 +1,6 @@
 diff -Naurp xupnpd-5c08c05/src/xupnpd.lua xupnpd-5c08c05-patch/src/xupnpd.lua
 --- xupnpd-5c08c05/src/xupnpd.lua	2016-07-06 11:31:11.000000000 +0300
-+++ xupnpd-5c08c05-patch/src/xupnpd.lua	2017-01-30 10:24:55.000000000 +0200
++++ xupnpd-5c08c05-patch/src/xupnpd.lua	2017-01-31 16:29:31.000000000 +0200
 @@ -1,10 +1,12 @@
  cfg={}
  
@@ -86,7 +86,7 @@ diff -Naurp xupnpd-5c08c05/src/xupnpd.lua xupnpd-5c08c05-patch/src/xupnpd.lua
  
  -- static device UUID, '60bd2fb3-dabe-cb14-c766-0e319b54c29a' for example or nil
  cfg.uuid='60bd2fb3-dabe-cb14-c766-0e319b54c29a'
-@@ -69,15 +83,19 @@ cfg.cache_size=8
+@@ -69,15 +83,18 @@ cfg.cache_size=8
  cfg.cache_ttl=900
  
  -- default mime type (mpeg, mpeg_ts, mpeg1, mpeg2, ts, ...)
@@ -102,11 +102,10 @@ diff -Naurp xupnpd-5c08c05/src/xupnpd.lua xupnpd-5c08c05-patch/src/xupnpd.lua
  playlist=
  {
 +    { './playlists/torrent-tv/TTV-Local.m3u', 'Local TTV' },
-+    { './playlists/torrent-tv/TTV-Direct.m3u', 'Direct TTV' },
  --    { './playlists/mozhay.m3u', 'Mozhay.tv' },
  --    { './localmedia', 'Local Media Files' }
  --    { './private', 'Private Media Files', '127.0.0.1;192.168.1.1' }  -- only for 127.0.0.1 and 192.168.1.1
-@@ -86,10 +104,10 @@ playlist=
+@@ -86,10 +103,10 @@ playlist=
  -- feeds list (plugin, feed name, feed type)
  feeds=
  {
@@ -121,7 +120,7 @@ diff -Naurp xupnpd-5c08c05/src/xupnpd.lua xupnpd-5c08c05-patch/src/xupnpd.lua
  --    { 'youtube',        'Drift0r',              'Drift0r' },
  --    { 'youtube',        'XboxAhoy',             'XboxAhoy' },
  --    { 'ag',             'videos',               'AG - New' },
-@@ -102,7 +120,7 @@ feeds=
+@@ -102,7 +119,7 @@ feeds=
  -- log ident, pid file end www root
  cfg.version='1.034'
  cfg.log_ident=arg[1] or 'xupnpd'

@@ -5,12 +5,14 @@
 ################################################################################
 
 SERVICE_DIR="/storage/.cache/services"
-XUPNP_CONFIG="/storage/.config/xupnpd/xupnpd.lua"
 
 [ -f $SERVICE_DIR/xupnpd.conf ] && . $SERVICE_DIR/xupnpd.conf
 
 [ -z $XUPNP_PORT ] && XUPNP_PORT="8687"
 [ -z $XUPNP_DEBUG ] && XUPNP_DEBUG="0"
+
+XUPNP_DIR="/storage/.config/xupnpd"
+XUPNP_CONFIG="$XUPNP_DIR/xupnpd.lua"
 
 # port
 sed -i -e "s/cfg\.http_port=.*/cfg\.http_port=$XUPNP_PORT/" $XUPNP_CONFIG
@@ -21,4 +23,15 @@ if [ "$XUPNP_DEBUG" == "0" ]; then
 else
   sed -i -e "s/cfg\.debug=.*/cfg\.debug=1/" $XUPNP_CONFIG
   sed -i -e "s/cfg\.embedded=.*/cfg\.embedded=false/" $XUPNP_CONFIG
+fi
+
+# TTV playlist
+RUN_ACEPROXY=`systemctl is-active aceproxy.service`
+RUN_ACESTREAM=`systemctl is-active acestream.service`
+
+if [ "$RUN_ACEPROXY" == "active" -a "$RUN_ACESTREAM" == "active" ]; then
+  LAN_IP=`ifconfig eth0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
+  URL="http://$LAN_IP:8000/channels/?type=m3u"
+  rm -f $XUPNP_DIR/playlists/torrent-tv/TTV-Local.m3u
+  wget --quiet --output-document="$XUPNP_DIR/playlists/torrent-tv/TTV-Local.m3u" $URL > /dev/null 2>&1
 fi
