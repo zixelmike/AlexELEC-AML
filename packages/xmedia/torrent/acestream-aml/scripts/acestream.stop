@@ -14,8 +14,7 @@ pkill -9 -f "/system/data/data/org.acestream.engine/files/python/bin/python" &>/
 pkill -9 -f "/system/bin/acestream.sh" &>/dev/null
 
 rm -f $CLEAN_LOCK_FILE
-
-[ "$ACE_CLEAN_CACHE" == "1" ] && rm -fR $CHROOT_DIR/media/acecache &>/dev/null
+rm -fR $CHROOT_DIR/media/acecache &>/dev/null
 
 if [ "$ACE_MOUNT_USB" != "none" ]; then
   /sbin/chroot $CHROOT_DIR /system/bin/toolbox umount /media &>/dev/null
