@@ -30,7 +30,7 @@ if [ -f $CHROOT_DIR/acestream-user.conf ]; then
   fi
 fi
 
-if [ "$ACE_CACHE_TYPE" == "memory" ]; then
+if [ "$ACE_CACHE_TYPE" == "memory" -a "$ACE_CLEAN_CACHE" == "1" ]; then
   CACHE_DIR="$CHROOT_DIR/media/acecache/.acestream_cache"
   CLEAN_LOCK_FILE="/var/lock/aceclean.lock"
   touch $CLEAN_LOCK_FILE
