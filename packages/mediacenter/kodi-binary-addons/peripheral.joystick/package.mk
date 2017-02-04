@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="peripheral.joystick"
-PKG_VERSION="c786dbf"
+PKG_VERSION="d573963"
 PKG_REV="0"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
