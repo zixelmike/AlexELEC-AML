@@ -4,13 +4,13 @@
 ################################################################################
 
 PKG_NAME="retroarch"
-PKG_VERSION="6abcaff"
+PKG_VERSION="a2141e6"
 PKG_REV="1"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/RetroArch"
 PKG_URL="none"
-PKG_DEPENDS_TARGET="toolchain samba avahi nss-mdns ffmpeg alsa-lib freetype zlib retroarch-assets core-info retroarch-joypad-autoconfig common-shaders libretro-database"
+PKG_DEPENDS_TARGET="toolchain samba avahi nss-mdns ffmpeg alsa-lib freetype zlib retroarch-assets core-info retroarch-joypad-autoconfig common-shaders common-overlays libretro-database"
 PKG_SECTION="xmedia/games"
 PKG_SHORTDESC="Reference frontend for the libretro API."
 PKG_LONGDESC="RetroArch is the reference frontend for the libretro API. Popular examples of implementations for this API includes videogame system emulators and game engines, but also more generalized 3D programs. These programs are instantiated as dynamic libraries. We refer to these as libretro cores."
@@ -93,6 +93,7 @@ makeinstall_target() {
   sed -i -e "s/# video_filter_dir =/video_filter_dir =\/usr\/share\/retroarch\/video_filters/" $INSTALL/etc/retroarch.cfg
   sed -i -e "s/# video_gpu_screenshot = true/video_gpu_screenshot = false/" $INSTALL/etc/retroarch.cfg
   sed -i -e "s/# video_fullscreen = false/video_fullscreen = true/" $INSTALL/etc/retroarch.cfg
+  sed -i -e "s/# overlay_directory =/overlay_directory =\/usr\/share\/retroarch\/overlay/" $INSTALL/etc/retroarch.cfg
 
   # Audio
   sed -i -e "s/# audio_driver =/audio_driver = \"alsathread\"/" $INSTALL/etc/retroarch.cfg
