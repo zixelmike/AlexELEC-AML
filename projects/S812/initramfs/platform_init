@@ -59,9 +59,8 @@ yRes=720;
 
 # Get max supported display resolution by hdmi device
 maxRes=$(tail -n1 /sys/class/amhdmitx/amhdmitx0/disp_cap | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//');
-if [ -z "$maxRes" ]; then
-  maxRes="$hdmimode";
-fi
+[ -z "$maxRes" ] && maxRes="$hdmimode";
+
 case "$maxRes" in
   480*)
     xRes=720; yRes=480;
