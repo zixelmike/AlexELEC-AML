@@ -31,6 +31,7 @@ fi
 case "$TARGET_ARCH" in
   arm)
     FFMPEG_TABLES="--enable-hardcoded-tables"
+    CFLAGS="$CFLAGS -mthumb"
     ;;
   *)
     FFMPEG_TABLES="--disable-hardcoded-tables"
