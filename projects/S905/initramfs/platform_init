@@ -6,8 +6,6 @@
 
 hdmimode="1080p50hz"
 
-[ ! -e /dev/system ] && insmod "/lib/modules/aml_nftl_dev.ko"
-
 # Parse command line arguments
 for arg in $(cat /proc/cmdline); do
   case ${arg} in
@@ -67,7 +65,7 @@ esac
 
 # Include deinterlacer into default VFM map
 echo rm default > /sys/class/vfm/map
-echo add default decoder ppmgr deinterlace amvideo > /sys/class/vfm/map
+echo add default decoder ppmgr deinterlace amlvideo amvideo > /sys/class/vfm/map
 
 # Enable framebuffer device
 echo 0 > /sys/class/graphics/fb0/blank
