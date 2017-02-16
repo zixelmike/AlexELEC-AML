@@ -151,6 +151,8 @@ post_makeinstall_target() {
   if [ "$TARGET_ARCH" = "arm" -a "$TARGET_FLOAT" = "hard" ]; then
     ln -sf ld.so $INSTALL/lib/ld-linux.so.3
   fi
+
+  find $INSTALL -type f -name \*.so -exec $STRIP --strip-debug {} \;
 }
 
 configure_init() {
