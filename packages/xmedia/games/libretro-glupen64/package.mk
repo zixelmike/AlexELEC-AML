@@ -4,24 +4,19 @@
 ################################################################################
 
 PKG_NAME="libretro-glupen64"
-PKG_VERSION="c533113"
+PKG_VERSION="04adfb2"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
-PKG_SITE="https://github.com/loganmc10/GLupeN64"
-PKG_URL="none"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_SITE="https://github.com/GLupeN64/GLupeN64"
+PKG_URL="https://github.com/GLupeN64/GLupeN64/archive/$PKG_VERSION.tar.gz"
+PKG_SOURCE_DIR="GLupeN64-$PKG_VERSION*"
+PKG_DEPENDS_TARGET="toolchain nasm:host"
 PKG_SECTION="xmedia/games"
 PKG_SHORTDESC="mupen64plus + RSP-HLE + GLideN64 + libretro"
+PKG_LONGDESC="mupen64plus + RSP-HLE + GLideN64 + libretro."
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
-
-unpack() {
-  git clone --recursive https://github.com/loganmc10/GLupeN64.git $PKG_BUILD
-  cd $PKG_BUILD
-  git reset --hard $PKG_VERSION
-  cd $ROOT
-}
 
 pre_build_target() {
   strip_lto
@@ -43,5 +38,5 @@ make_target() {
 
 makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/libretro
-    cp `find . -name "*.so" | xargs echo` $INSTALL/usr/lib/libretro/
+    cp glupen64_libretro.so $INSTALL/usr/lib/libretro
 }
