@@ -47,7 +47,7 @@ if [ "$TARGET_ARCH" = "aarch64" ]; then
 else
   # games
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET emulationstation retroarch"
-  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-mupen64plus"
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-parallel-n64"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-ppsspp"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-pcsx_rearmed"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-genesis-plus-gx"
