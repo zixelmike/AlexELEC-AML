@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="kodi-theme-AeonNox"
-PKG_VERSION="bbd197d"
+PKG_VERSION="9f80706"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
