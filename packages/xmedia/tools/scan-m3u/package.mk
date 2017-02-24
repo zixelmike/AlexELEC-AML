@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="scan-m3u"
-PKG_VERSION="1.2"
+PKG_VERSION="1.3"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
@@ -24,10 +24,10 @@ pre_configure_target() {
 }
 
 make_target() {
-  cp -aP $PKG_DIR/source/* ./
   CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f m3u_info.src
   CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f scan-m3u.src
   CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f scan-ttv.src
+  CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f live-ttv.src
 }
 
 makeinstall_target() {
@@ -36,4 +36,5 @@ makeinstall_target() {
     cp m3u_info.src.x $INSTALL/usr/bin/m3u_info
     cp scan-m3u.src.x $INSTALL/usr/bin/scan-m3u
     cp scan-ttv.src.x $INSTALL/usr/bin/scan-ttv
+    cp live-ttv.src.x $INSTALL/usr/bin/live-ttv
 }
