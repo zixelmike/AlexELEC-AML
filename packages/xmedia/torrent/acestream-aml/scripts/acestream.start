@@ -7,6 +7,9 @@
 SERVICE_DIR="/storage/.cache/services"
 CHROOT_DIR="/storage/.config/acestream"
 LOG_FILE="/var/log/acestream.log"
+MOUNT_STATE="$CHROOT_DIR/disk.mount"
+
+rm -f $MOUNT_STATE
 
 [ -f $SERVICE_DIR/acestream.conf ] && . $SERVICE_DIR/acestream.conf
 
@@ -36,6 +39,7 @@ if [ "$MOUNT_DISK" != "none" ]; then
   if [ "$MOUNT_TYPE" == "vfat" -o "$MOUNT_TYPE" == "ext4" -o "$MOUNT_TYPE" == "ext3" -o "$MOUNT_TYPE" == "ext2" ]; then
     rm -fR $CHROOT_DIR/media/acecache &>/dev/null
     /sbin/chroot $CHROOT_DIR /system/bin/toolbox mount -t $MOUNT_TYPE $MOUNT_DISK /media &>/dev/null
+    echo "$MOUNT_DISK" > $MOUNT_STATE
   fi
 fi
 
@@ -45,10 +49,10 @@ fi
 import os
 import argparse
 from acestreamengine import Core
- 
+
 params = "$@".split(' ')
 if params == ['']:
     params = []
- 
+
 Core.run(params)
 EOF
