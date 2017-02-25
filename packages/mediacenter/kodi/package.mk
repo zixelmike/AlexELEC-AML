@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="kodi"
-GIT_VERSION="82eaae9"
+GIT_VERSION="8b422f7"
 PKG_VERSION="17.1-rc1-$GIT_VERSION"
 PKG_REV="1"
 PKG_ARCH="any"
