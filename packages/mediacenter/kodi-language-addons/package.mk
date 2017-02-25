@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="kodi-language-addons"
-PKG_VERSION="29862bf"
+PKG_VERSION="a7c62b7"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
