@@ -27,9 +27,12 @@ mount -t proc proc $CHROOT_DIR/proc &>/dev/null
 mount -t sysfs sysfs $CHROOT_DIR/sys &>/dev/null
 
 MOUNT_DISK="none"
-if [ "$ACE_MOUNT_USB" != "none" ]; then
+IS_MOUNT_SD=$(/bin/mount | grep '/dev/mmcblk.* on /var/media')
+IS_MOUNT_USB=$(/bin/mount | grep '/dev/sd[a-z][1-9] on /var/media')
+
+if [ -n "$IS_MOUNT_USB" -a "$ACE_MOUNT_USB" != "none" ]; then
   MOUNT_DISK=$(echo $ACE_MOUNT_USB | awk '{ print $1 }')
-elif [ "$ACE_MOUNT_SD" != "none" ]; then
+elif [ -n "$IS_MOUNT_SD" -a "$ACE_MOUNT_SD" != "none" ]; then
   MOUNT_DISK=$(echo $ACE_MOUNT_SD | awk '{ print $1 }')
 fi
 

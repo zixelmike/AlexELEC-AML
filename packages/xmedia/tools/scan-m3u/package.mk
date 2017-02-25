@@ -37,4 +37,6 @@ makeinstall_target() {
     cp scan-m3u.src.x $INSTALL/usr/bin/scan-m3u
     cp scan-ttv.src.x $INSTALL/usr/bin/scan-ttv
     cp live-ttv.src.x $INSTALL/usr/bin/live-ttv
+  mkdir -p $INSTALL/usr/config/acestream
+    cp $PKG_DIR/config/* $INSTALL/usr/config/acestream
 }
