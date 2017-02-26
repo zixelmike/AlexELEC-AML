@@ -41,14 +41,11 @@ cat $IN_FILE | sed 's/(Развлекательные)//; \
 
 sed "s|ttv-logo=|tvg-logo=|g" -i $OUT_FILE
 
-get_ip (){
-  URL_IP=`ifconfig eth0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
-  if [ -z $URL_IP ]; then
-    URL_IP=`ifconfig wlan0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
-    [ -z $URL_IP ] && URL_IP="127.0.0.1"
-  fi
-}
-
+URL_IP=`ifconfig eth0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
+if [ -z $URL_IP ]; then
+  URL_IP=`ifconfig wlan0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
+  [ -z $URL_IP ] && URL_IP="127.0.0.1"
+fi
 sed -i -e "s/http:\/\/.*:6878/http:\/\/$URL_IP:6878/g" $OUT_FILE
 
 if [ ! -f "$LOGO_LIST" ]; then
