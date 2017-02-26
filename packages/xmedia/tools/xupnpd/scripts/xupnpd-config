@@ -25,17 +25,29 @@ else
   sed -i -e "s/cfg\.embedded=.*/cfg\.embedded=false/" $XUPNP_CONFIG
 fi
 
-# TTV playlist
+# TTV playlists
 RUN_ACEPROXY=`systemctl is-active aceproxy.service`
 RUN_ACESTREAM=`systemctl is-active acestream.service`
+TTV_LIVE_IN="/storage/ttv-m3u/AceLive-TTV.m3u"
+TTV_LIVE_OUT="$XUPNP_DIR/playlists/torrent-tv/TTV-Live.m3u"
 
-if [ "$RUN_ACEPROXY" == "active" -a "$RUN_ACESTREAM" == "active" ]; then
+get_ip (){
   URL_IP=`ifconfig eth0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
   if [ -z $URL_IP ]; then
     URL_IP=`ifconfig wlan0 | awk '/inet addr:/ {print $2}' | sed 's/addr://'`
     [ -z $URL_IP ] && URL_IP="127.0.0.1"
   fi
+}
+
+if [ "$RUN_ACEPROXY" == "active" -a "$RUN_ACESTREAM" == "active" ]; then
+  get_ip
   URL="http://$URL_IP:8000/channels/?type=m3u"
   rm -f $XUPNP_DIR/playlists/torrent-tv/TTV-Local.m3u
   wget --quiet --output-document="$XUPNP_DIR/playlists/torrent-tv/TTV-Local.m3u" $URL > /dev/null 2>&1
+fi
+
+if [ -f "$TTV_LIVE" -a "$RUN_ACEPROXY" == "active" ]; then
+  cp -u $TTV_LIVE_IN $TTV_LIVE_OUT
+  get_ip
+  sed -i -e "s/http:\/\/.*:6878/http:\/\/$URL_IP:6878/g" $TTV_LIVE_OUT
 fi
