@@ -48,6 +48,4 @@ fi
 
 if [ -f "$TTV_LIVE" -a "$RUN_ACEPROXY" == "active" ]; then
   cp -u $TTV_LIVE_IN $TTV_LIVE_OUT
-  get_ip
-  sed -i -e "s/http:\/\/.*:6878/http:\/\/$URL_IP:6878/g" $TTV_LIVE_OUT
 fi
