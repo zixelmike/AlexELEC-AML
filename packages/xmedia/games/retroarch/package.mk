@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="retroarch"
-PKG_VERSION="a2141e6"
+PKG_VERSION="58c08c0"
 PKG_REV="1"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="GPLv3"
