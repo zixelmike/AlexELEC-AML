@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="libretro-snes9x2010"
-PKG_VERSION="66ba123"
+PKG_VERSION="b2a69de"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="Non-commercial"
@@ -19,7 +19,7 @@ PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
 
 make_target() {
-  make -f Makefile.libretro
+  make -f Makefile.libretro GIT_VERSION="\" $PKG_VERSION\""
 }
 
 makeinstall_target() {
