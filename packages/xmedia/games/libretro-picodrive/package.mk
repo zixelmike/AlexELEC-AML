@@ -4,12 +4,13 @@
 ################################################################################
 
 PKG_NAME="libretro-picodrive"
-PKG_VERSION="d6be4fa"
+PKG_VERSION="805d357"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="MAME"
 PKG_SITE="https://github.com/libretro/picodrive"
-PKG_URL="none"
+PKG_URL="https://github.com/libretro/picodrive/archive/$PKG_VERSION.tar.gz"
+PKG_SOURCE_DIR="picodrive-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain $PKG_NAME:host"
 PKG_SECTION="xmedia/games"
 PKG_SHORTDESC="Libretro implementation of PicoDrive. (Sega Megadrive/Genesis/Sega Master System/Sega GameGear/Sega CD/32X)"
@@ -17,10 +18,12 @@ PKG_LONGDESC="This is yet another Megadrive / Genesis / Sega CD / Mega CD / 32X 
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
 
-unpack() {
-  git clone --recursive https://github.com/libretro/picodrive $PKG_BUILD
+post_unpack() {
   cd $PKG_BUILD
-  git reset --hard $PKG_VERSION
+  git clone https://github.com/notaz/cyclone68000.git cpu/cyclone
+  git clone https://github.com/notaz/libpicofe.git platform/libpicofe
+  rm -rf cpu/cyclone/.git
+  rm -rf platform/libpicofe/.git
   rm -rf .git
   cd $ROOT
 }
@@ -54,7 +57,17 @@ configure_target() {
 }
 
 make_target() {
-  make -f Makefile.libretro
+  case $PROJECT in
+    S805)
+       make -f Makefile.libretro platform=armv-aml805
+      ;;
+    S812)
+      make -f Makefile.libretro platform=armv-aml812
+      ;;
+    S905)
+      make -f Makefile.libretro platform=armv-aml905
+      ;;
+  esac
 }
 
 makeinstall_target() {
