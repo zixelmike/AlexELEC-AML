@@ -76,14 +76,18 @@ install_to_nand() {
         fi
         echo -n "Restarting Kodi..."
         systemctl start kodi
-        echo -e "${COL_BLUE}done.${COL_RESET}"
+        echo "done."
         ;;
     esac
 
-    echo -e "${COL_BLUE}All done!${COL_YELLOW} You can now continue using your AlexELEC system or type ${COL_RED}\"nand-reboot\"${COL_YELLOW} to reboot from internal memory.${COL_RESET}"
+    echo ""
+    echo -e "${COL_BLUE}All done!${COL_YELLOW} You can now continue using your AlexELEC system or type \"${COL_RED}nand-reboot${COL_YELLOW}\" to reboot from internal memory.${COL_RESET}"
+    echo ""
 
   else
+    echo ""
     echo -e "${COL_RED}No AlexELEC image found on /flash! Exiting...${COL_RESET}"
+    echo ""
   fi
 }
 
