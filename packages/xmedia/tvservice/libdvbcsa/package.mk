@@ -4,7 +4,7 @@
 ################################################################################
 
 PKG_NAME="libdvbcsa"
-PKG_VERSION="f988715"
+PKG_VERSION="aae3d0c"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPL"
