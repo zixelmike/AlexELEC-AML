@@ -1,6 +1,6 @@
 diff -Naurp libretro-picodrive-805d357/Makefile.libretro libretro-picodrive-805d357-patch/Makefile.libretro
 --- libretro-picodrive-805d357/Makefile.libretro	2017-02-27 02:04:44.000000000 +0200
-+++ libretro-picodrive-805d357-patch/Makefile.libretro	2017-03-04 16:17:38.000000000 +0200
++++ libretro-picodrive-805d357-patch/Makefile.libretro	2017-03-04 20:09:03.000000000 +0200
 @@ -355,37 +355,25 @@ else ifeq ($(platform), qnx)
  	use_sh2drc = 1
  	use_svpdrc = 1
@@ -24,7 +24,7 @@ diff -Naurp libretro-picodrive-805d357/Makefile.libretro libretro-picodrive-805d
 -		CFLAGS += -marm -mcpu=cortex-a15.cortex-a7
 -		ASFLAGS += -mcpu=cortex-a15.cortex-a7
 +	ifneq (,$(findstring aml805,$(platform)))
-+		CFLAGS += -marm --mcpu=cortex-a5 -mfpu=neon-vfpv4
++		CFLAGS += -marm -mcpu=cortex-a5 -mfpu=neon-vfpv4
 +		ASFLAGS += -mcpu=cortex-a5 -mfpu=neon-vfpv4
 +	else ifneq (,$(findstring aml905,$(platform)))
 +		CFLAGS += -marm -mcpu=cortex-a53 -mfpu=neon-fp-armv8
