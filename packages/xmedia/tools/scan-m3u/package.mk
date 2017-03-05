@@ -28,6 +28,7 @@ make_target() {
   CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f scan-m3u.src
   CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f scan-ttv.src
   CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f live-ttv.src
+  CC=$CC CFLAGS=$CFLAGS ./shc -v -r -B -f live-ttv-get.src
 }
 
 makeinstall_target() {
@@ -37,6 +38,7 @@ makeinstall_target() {
     cp scan-m3u.src.x $INSTALL/usr/bin/scan-m3u
     cp scan-ttv.src.x $INSTALL/usr/bin/scan-ttv
     cp live-ttv.src.x $INSTALL/usr/bin/live-ttv
+    cp live-ttv-get.src.x $INSTALL/usr/bin/live-ttv-get
   mkdir -p $INSTALL/usr/config/acestream
     cp $PKG_DIR/config/* $INSTALL/usr/config/acestream
 }
