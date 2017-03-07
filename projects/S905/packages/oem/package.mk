@@ -41,11 +41,7 @@ post_install() {
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET ImageMagick mc aml-vnc scan-s2 scan-m3u serviceref"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET udpxy syncthing xupnpd"
 
-if [ "$TARGET_ARCH" = "aarch64" ]; then
-  # 32bit libs
-  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET 32bit-libs"
-else
-  # games
+# games
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET emulationstation retroarch"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-parallel-n64"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-ppsspp"
@@ -57,7 +53,6 @@ else
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-fuse"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-nestopia"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libretro-picodrive"
-fi
 
 # dvb drivers
 if [ "$DEVICE" != "K1Plus" ]; then
