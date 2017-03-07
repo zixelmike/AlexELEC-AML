@@ -8,7 +8,7 @@ SERVICE_DIR="/storage/.cache/services"
 M3U_DIR="/storage/ttv-m3u"
 ACE_M3U="$M3U_DIR/AceLive-TTV.m3u"
 ACE_DIR="/storage/.config/acestream"
-JSON_FILE="$ACE_DIR/acelive.json"
+JSON_FILE="$ACE_DIR/ttv-m3u/acelive.json"
 LOGO_LIST="$ACE_DIR/ttv-logo.list"
 TMP_LIST="/tmp/tmp-acettv.list"
 
@@ -21,6 +21,7 @@ if [ -f "$JSON_FILE" ]; then
   STAT_OLD=`stat $JSON_FILE | grep 'Modify:'`
 fi
 
+mkdir -p $ACE_DIR/ttv-m3u
 curl -s -R -z "$JSON_FILE" -o "$JSON_FILE" "http://super-pomoyka.us.to/trash/ttv-list/acelive.json"
 
 if [ ! -f "$JSON_FILE" ]; then
