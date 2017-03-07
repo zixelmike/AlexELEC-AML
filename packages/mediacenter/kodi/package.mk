@@ -15,9 +15,10 @@ PKG_DEPENDS_TARGET="toolchain JsonSchemaBuilder:host TexturePacker:host xmlstarl
 PKG_SECTION="mediacenter"
 PKG_SHORTDESC="kodi: Kodi Mediacenter"
 PKG_LONGDESC="Kodi Media Center (which was formerly named Xbox Media Center or XBMC) is a free and open source cross-platform media player and home entertainment system software with a 10-foot user interface designed for the living-room TV. Its graphical user interface allows the user to easily manage video, photos, podcasts, and music from a computer, optical disk, local network, and the internet using a remote control."
-
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
+
+PKG_PATCH_DIRS="amlogic-all"
 
 PKG_CMAKE_SCRIPT="$ROOT/$PKG_BUILD/project/cmake/CMakeLists.txt"
 
@@ -176,19 +177,11 @@ else
   KODI_ARCH="-DWITH_ARCH=$TARGET_ARCH"
 fi
 
-if [ ! "$KODIPLAYER_DRIVER" = default ]; then
+if [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $KODIPLAYER_DRIVER"
-  if [ "$KODIPLAYER_DRIVER" = bcm2835-driver ]; then
-    KODI_PLAYER="-DENABLE_MMAL=ON -DCORE_SYSTEM_NAME=rbpi"
-  elif [ "$KODIPLAYER_DRIVER" = libfslvpuwrap ]; then
-    KODI_PLAYER="-DENABLE_IMX=ON"
-    CFLAGS="$CFLAGS -DHAS_IMXVPU -DLINUX -DEGL_API_FB"
-    CXXFLAGS="$CXXFLAGS -DHAS_IMXVPU -DLINUX -DEGL_API_FB"
-  elif [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
-    KODI_PLAYER="-DENABLE_AML=ON"
-    CFLAGS="$CFLAGS -mthumb"
-    CXXFLAGS="$CXXFLAGS -mthumb"
-  fi
+  KODI_PLAYER="-DENABLE_AML=ON"
+  CFLAGS="$CFLAGS -mthumb"
+  CXXFLAGS="$CXXFLAGS -mthumb"
 fi
 
 KODI_LIBDVD="$KODI_DVDCSS \

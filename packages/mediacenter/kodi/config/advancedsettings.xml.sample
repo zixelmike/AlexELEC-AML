@@ -6,9 +6,9 @@
     <clienttimeout>30</clienttimeout>
   </samba>
   <cache>
-    <memorysize>20971520</memorysize>
-    <buffermode>0</buffermode>
-    <readfactor>40</readfactor>
+    <memorysize>52428800</memorysize>
+    <buffermode>1</buffermode>
+    <readfactor>20</readfactor>
   </cache>
   <pvr>
     <minvideocachelevel>5</minvideocachelevel>
