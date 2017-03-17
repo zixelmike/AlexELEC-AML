@@ -399,8 +399,8 @@ if [ "$1" = "release" -o "$1" = "mkimage" -o "$1" = "amlpkg" ]; then
     fi
 
     # copy device tree image if any
-    if [ -f "$INSTALL/usr/share/bootloader/dtb.img" ]; then
-      cp "$INSTALL/usr/share/bootloader/dtb.img" $AML_PKG_DIR/dtb.img
+    if [ -f "$TARGET_IMG/$IMAGE_NAME.dtb" ]; then
+      cp "$TARGET_IMG/$IMAGE_NAME.dtb" $AML_PKG_DIR/dtb.img
     fi
 
     # create the update package
@@ -416,9 +416,9 @@ if [ "$1" = "release" -o "$1" = "mkimage" -o "$1" = "amlpkg" ]; then
     # create the auto-install package
     echo "Creating Amlogic ZIP auto-install package"
     pushd sign > /dev/null
-    echo --update_package=/sdcard/$AML_UPDATE_NAME-update.zip > factory_update_param.aml
-    echo --wipe_data >> factory_update_param.aml
+    echo --wipe_data > factory_update_param.aml
     echo --wipe_cache >> factory_update_param.aml
+    echo --update_package=/sdcard/$AML_UPDATE_NAME-update.zip >> factory_update_param.aml
     if [ -f "$INSTALL_SRC_DIR/files/recovery.img" ]; then
       cp $INSTALL_SRC_DIR/files/recovery.img .
     fi
@@ -428,8 +428,8 @@ if [ "$1" = "release" -o "$1" = "mkimage" -o "$1" = "amlpkg" ]; then
     fi
 
     # copy device tree image if any
-    if [ -f "$ROOT/$INSTALL/usr/share/bootloader/dtb.img" ]; then
-      cp "$ROOT/$INSTALL/usr/share/bootloader/dtb.img" .
+    if [ -f "$AML_PKG_DIR/dtb.img" ]; then
+      cp "$AML_PKG_DIR/dtb.img" .
     fi
 
     zip -q $TARGET_IMG/$IMAGE_NAME.zip *
