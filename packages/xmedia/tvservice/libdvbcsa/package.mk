@@ -18,16 +18,11 @@ PKG_LONGDESC="libdvbcsa is a free implementation of the DVB Common Scrambling Al
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="yes"
 
-PKG_CONFIGURE_OPTS_TARGET="--disable-shared --enable-static --with-sysroot=$SYSROOT_PREFIX"
-
-if echo "$TARGET_FPU" | grep -q '^neon'; then
-  PKG_CONFIGURE_OPTS_TARGET="$PKG_CONFIGURE_OPTS_TARGET --enable-neon"
-fi
+PKG_CONFIGURE_OPTS_TARGET="--disable-shared --enable-static --enable-neon --with-sysroot=$SYSROOT_PREFIX"
 
 pre_configure_target() {
-# libdvbcsa is a bit faster without LTO, and tests will fail with gcc-5.x
+  # libdvbcsa is a bit faster without LTO, and tests will fail with gcc-5.x
   strip_lto
 
   export CFLAGS="$CFLAGS -fPIC"
 }
-
